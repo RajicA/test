@@ -3,10 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
-nz-form-control {
-  width: 360px;
-}
-div {
+.patient-new-form__items-wrapper {
   max-width: 800px;
   display: flex;
   align-items: flex-end;
@@ -19,4 +16,7 @@ div {
 }
 .patient-new-form__remove-address-btn {
   text-align: right;
+}
+nz-form-control {
+  width: 360px;
 }

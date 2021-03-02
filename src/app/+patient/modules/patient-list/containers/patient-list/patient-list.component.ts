@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CrudService } from 'app/shared/services/crud.service';
+import { PatientService } from 'app/shared/services/patient.service';
 import { Patient } from 'app/shared/models/patient.model';
 
 @Component({
@@ -11,13 +11,13 @@ export class PatientListComponent implements OnInit {
 
   data: any;
 
-  constructor(private crudService: CrudService) {}
+  constructor(private patientService: PatientService) { }
 
   ngOnInit() {
-    this.crudService.getPatients()
-    .subscribe((patients: Patient[]) => {
-      console.log(patients);
-      this.data = {patients};
-    });
+    this.patientService.getPatients()
+      .subscribe((patients: Patient[]) => {
+        console.log(patients);
+        this.data = { patients };
+      });
   }
 }

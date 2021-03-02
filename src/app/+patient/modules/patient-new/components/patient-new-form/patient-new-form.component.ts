@@ -9,7 +9,7 @@ import { PatientFormFactory } from '../../shared/patient-form.factory';
 import { Doctor } from 'app/shared/models/doctor.model';
 import { doctors } from 'app/shared/utils/doctors-mock';
 import { formatData } from 'app/shared/utils/formatter';
-import { CrudService } from 'app/shared/services/crud.service';
+import { PatientService } from 'app/shared/services/patient.service';
 import { Patient, patientMapper } from 'app/shared/models/patient.model';
 import { Router } from '@angular/router';
 
@@ -45,7 +45,7 @@ export class PatientNewFormComponent implements OnInit, OnDestroy {
   constructor(
     private patientFormFactory: PatientFormFactory,
     private modal: NzModalService,
-    private crudService: CrudService,
+    private patientService: PatientService,
     private router: Router
   ) { }
 
@@ -117,17 +117,17 @@ export class PatientNewFormComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
-    const data = formatData(this.patientForm, this.addressesControl);
+    const invalidFields = formatData(this.patientForm, this.addressesControl);
 
-    if (data) {
+    if (invalidFields) {
       this.modal.info({
         nzTitle: 'Ivalid fields',
-        nzContent: data
+        nzContent: invalidFields
       });
     } else {
       const patient = patientMapper(this.patientForm.getRawValue());
 
-      this.crudService.addPatient(patient)
+      this.patientService.addPatient(patient)
         .subscribe(() => {
           this.router.navigate(['/']);
         });

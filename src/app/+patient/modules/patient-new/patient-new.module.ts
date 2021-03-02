@@ -6,6 +6,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -32,6 +33,7 @@ import { PatientFormFactory } from './shared/patient-form.factory';
     NzDividerModule,
     NzSelectModule,
     NzModalModule,
+    NzIconModule,
   ],
   providers: [PatientFormFactory],
 })
