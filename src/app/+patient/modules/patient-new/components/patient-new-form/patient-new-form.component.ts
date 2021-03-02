@@ -4,14 +4,14 @@ import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { filter } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { Router } from '@angular/router';
 
 import { PatientFormFactory } from '../../shared/patient-form.factory';
 import { Doctor } from 'app/shared/models/doctor.model';
 import { doctors } from 'app/shared/utils/doctors-mock';
 import { formatData } from 'app/shared/utils/formatter';
 import { PatientService } from 'app/shared/services/patient.service';
-import { Patient, patientMapper } from 'app/shared/models/patient.model';
-import { Router } from '@angular/router';
+import { patientMapper } from 'app/shared/utils/patient-mapper';
 
 @Component({
   selector: 'test-patient-new-form',
