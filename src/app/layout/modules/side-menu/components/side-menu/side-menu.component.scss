@@ -1,0 +1,20 @@
+.side-menu__sider-wrapper {
+  height: 100%;
+}
+.side-menu__sider {
+  height: 100%;
+  border-right: 0;
+  transition: none;
+}
+.side-menu__btn {
+  margin-top: 35px;
+  margin-bottom: 12px;
+  margin-right: 15px;
+  margin-left: auto;
+}
+.side-menu__btn-wrapper {
+  display: flex;
+}
+.side-menu__link {
+  padding-right: 50px;
+}

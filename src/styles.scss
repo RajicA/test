@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+
+$header-height: 72px;
+$side-menu-width: 150px;
+
+$color-white: #FFF;
+
+$transition-regular: 0.1s all ease-in-out;
+$font-family: 'Poppins', sans-serif;
+
+// VARS END
+
+body {
+  margin: 0;
+  font-family: $font-family;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}

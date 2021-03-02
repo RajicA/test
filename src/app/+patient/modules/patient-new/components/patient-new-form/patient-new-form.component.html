@@ -1,0 +1,171 @@
+<form class="patient-new-form__form" nz-form nzLayout="horizontal" [formGroup]="patientForm">
+  <div>
+    <nz-form-item>
+      <nz-form-label nzRequired>First Name</nz-form-label>
+      <nz-form-control nzErrorTip="Please type First Name">
+        <input type="text" nz-input formControlName="firstName" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Last Name</nz-form-label>
+      <nz-form-control nzErrorTip="Please type Last Name">
+        <input type="text" nz-input formControlName="lastName" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Birth Date</nz-form-label>
+      <nz-form-control nzErrorTip="Please type Birth Date">
+        <nz-date-picker formControlName="birthDate"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>VAT</nz-form-label>
+      <nz-form-control nzErrorTip="Please type VAT">
+        <input type="text" nz-input formControlName="vat" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Mail</nz-form-label>
+      <nz-form-control [nzErrorTip]="mailErrors">
+        <input type="email" nz-input formControlName="mail" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>Doctor</nz-form-label>
+      <nz-form-control nzErrorTip="Please select Doctor">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input nz-input [nzAutocomplete]="auto" formControlName="doctor" />
+          <nz-autocomplete #auto>
+            <nz-auto-option *ngFor="let doctor of filteredDoctors" [nzValue]="doctor.id" [nzLabel]="doctor.name">
+              {{ doctor.name }}
+            </nz-auto-option>
+          </nz-autocomplete>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- NEW ADDRESS START -->
+
+    <ng-container formArrayName="addresses">
+      <div *ngFor="let _ of addressesControl.controls; index as i">
+
+        <form class="patient-new-form__address-form" nz-form nzLayout="horizontal"
+          [formGroup]="addressesControl.controls[i]">
+
+          <div>
+            <nz-divider [nzText]="i ? 'New address' : 'Home address'" nzOrientation="left"></nz-divider>
+
+            <nz-form-item class="patient-new-form__remove-address-btn" *ngIf="i">
+              <nz-form-control>
+                <button (click)="deleteAddress(i)" nz-button nzType="primary"><i nz-icon nzType="delete"></i></button>
+              </nz-form-control>
+            </nz-form-item>
+
+            <ng-container *ngIf="i">
+              <nz-form-item>
+                <nz-form-label nzRequired>Type</nz-form-label>
+                <nz-form-control>
+                  <nz-select formControlName="type" nzErrorTip="Select address type"
+                    (ngModelChange)="changeType($event, i)">
+                    <nz-option nzValue="SECOND_HOME" nzLabel="Second Home"></nz-option>
+                    <nz-option nzValue="WORK" nzLabel="Work"></nz-option>
+                    <nz-option nzValue="HOLIDAY" nzLabel="Holiday place"></nz-option>
+                    <nz-option nzValue="RELATIVE" nzLabel="Close  relative"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item *ngIf="['WORK', 'RELATIVE'].includes(addressesControl.controls[i].value.type)">
+                <nz-form-label nzRequired>Name</nz-form-label>
+                <nz-form-control nzErrorTip="Please type Name">
+                  <input type="text" nz-input formControlName="name" />
+                </nz-form-control>
+              </nz-form-item>
+            </ng-container>
+
+            <nz-form-item>
+              <nz-form-label nzRequired>Phone</nz-form-label>
+              <nz-form-control [nzErrorTip]="phoneErrors">
+                <input (blur)="transformPhone($event, i)" type="text" nz-input formControlName="phone" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label nzRequired>Street</nz-form-label>
+              <nz-form-control nzErrorTip="Please type Street">
+                <input type="text" nz-input formControlName="street" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label nzRequired>City</nz-form-label>
+              <nz-form-control nzErrorTip="Please type City">
+                <input type="text" nz-input formControlName="city" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label nzRequired>Zip code</nz-form-label>
+              <nz-form-control nzErrorTip="Please type Zip code">
+                <input type="text" nz-input formControlName="zipCode" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label nzRequired>Country</nz-form-label>
+              <nz-form-control nzErrorTip="Please type Country">
+                <input type="text" nz-input formControlName="country" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+        </form>
+
+      </div>
+    </ng-container>
+
+    <!-- NEW ADDRESS END -->
+
+    <nz-form-item class="patient-new-form__add-address-btn">
+      <nz-form-control>
+        <button (click)="addNewAddress()" nz-button nzType="primary"><i nz-icon nzType="plus"></i>Add address</button>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-divider></nz-divider>
+
+    <nz-form-item class="patient-new-form__save-btn">
+      <nz-form-control>
+        <button nz-button nzType="primary" (click)="onSave()">Save</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </div>
+</form>
+
+<ng-template #suffixIconSearch>
+  <i nz-icon nzType="search"></i>
+</ng-template>
+
+<ng-template #phoneErrors let-control>
+  <ng-container *ngIf="control.hasError('required')">
+    Please type Phone
+  </ng-container>
+  <ng-container *ngIf="control.hasError('pattern')">
+    <span>
+      Please enter a valid Phone
+    </span>
+  </ng-container>
+</ng-template>
+
+<ng-template #mailErrors let-control>
+  <ng-container *ngIf="control.hasError('required')">
+    Please type Mail
+  </ng-container>
+  <ng-container *ngIf="control.hasError('email')">
+    <span>
+      Please enter a valid Mail
+    </span>
+  </ng-container>
+</ng-template>

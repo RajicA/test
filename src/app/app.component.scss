@@ -1,0 +1,15 @@
+@import 'styles';
+
+.app-root__wrapper {
+  min-height: calc(100vh - 64px);
+  .app-root__content-wrapper {
+    display: flex;
+    min-height: calc(100vh - 64px);
+  }
+}
+.app-root__content{
+  margin: 20px;
+  padding: 34px;
+  background-color: $color-white;
+}
+

@@ -1,0 +1,10 @@
+@import 'styles';
+
+:host {
+  display: block;
+  height: calc(100% - #{$header-height});
+  width: 100%;
+  padding-top: calc(#{$header-height} + 30px);
+  padding-left: calc(#{$side-menu-width} + 30px);
+  padding-right: 30px;
+}

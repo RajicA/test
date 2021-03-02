@@ -1,0 +1,15 @@
+<nz-sider class="side-menu__sider">
+  <div class="side-menu__sider-wrapper">
+    <ul nz-menu nzMode="inline" nzTheme="light" [nzInlineCollapsed]="isCollapsed" class="side-menu__sider">
+      <li class="side-menu__btn-wrapper">
+        <button nz-button nzType="primary" (click)="toggleCollapsed()" class="side-menu__btn">
+          <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </button>
+      </li>
+      <li nz-menu-item nzMatchRouter nzMatchRouterExact *ngFor="let menuItem of menuItems">
+        <i nz-icon [nzType]="menuItem.icon"></i>
+        <span class="side-menu__link"><a [routerLink]="[menuItem.link]">{{menuItem.name}}</a></span>
+      </li>
+    </ul>
+  </div>
+</nz-sider>

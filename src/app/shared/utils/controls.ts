@@ -1,0 +1,16 @@
+export enum controlsMap {
+  firstName = 'First name',
+  lastName = 'Last name',
+  birthDate = 'Birth date',
+  mail = 'Mail',
+  doctor = 'Doctor',
+  addresses = 'Addresses',
+  vat = 'VAT',
+  phone = 'Phone',
+  street = 'Street',
+  city = 'City',
+  zipCode = 'Zip code',
+  country = 'Country',
+  name = 'Name',
+  type = 'Type',
+}
